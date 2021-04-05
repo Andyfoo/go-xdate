@@ -1,5 +1,6 @@
-#XDate
-golang 日期处理，format格式参考php date，不用记那些反人类的日期数字了，php用户可以很容易上手
+# XDate
+
+XDate 是对golang日期的扩展，format格式参考php date，不用记那些反人类的日期数字了，php用户可以很容易上手
 xdate. Now().PFormat("Y-m-d H:i:s")   
 
 >>> 2021-04-05 22:51:52
