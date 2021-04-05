@@ -1,6 +1,6 @@
 # XDate
 
-XDate 是对golang日期的扩展，format格式参考php date，不用记那些反人类的日期数字了
+XDate 是对golang日期的扩展，format格式参考php date，不用记那些烦人的日期数字了
 
 **xdate. Now().PFormat("Y-m-d H:i:s")**   
 
