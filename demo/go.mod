@@ -1,4 +1,4 @@
-module go-xdate-demo
+module demo
 
 go 1.16
 

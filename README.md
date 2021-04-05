@@ -1,13 +1,18 @@
 # XDate
 
-XDate 是对golang日期的扩展，format格式参考php date，不用记那些反人类的日期数字了，php用户可以很容易上手
-xdate. Now().PFormat("Y-m-d H:i:s")   
+XDate 是对golang日期的扩展，format格式参考php date，不用记那些反人类的日期数字了
+
+**xdate. Now().PFormat("Y-m-d H:i:s")**   
 
 >>> 2021-04-05 22:51:52
 
 作者：Andyfoo
 [http://andyfoo.com](http://andyfoo.com)
 [http://pslib.com](http://pslib.com)
+
+
+
+**示例：**
 
 ```go
 
@@ -25,21 +30,29 @@ func main() {
 	fmt.Println(xdate.PFormatConv("Y-m-d H:i:s"))
 	fmt.Println(xdate.Now().PFormat("Y-m-d H:i:s"))
 	fmt.Println(xdate.Now().Format(xdate.YMD))
+    
 	fmt.Println(xdate.Now().UTC().Format(xdate.TT))
 	fmt.Println(xdate.Now().UTC().PFormat("Y-m-d H:i:s"))
+    
 	fmt.Println(xdate.Now().Unix())
 	fmt.Println(xdate.Now().UnixMilli())
 	fmt.Println(xdate.Now().UnixNano())
+    
 	fmt.Println(xdate.Now().Weekday())
 	fmt.Println(xdate.Now().WeekdayStr(xdate.WeekType_cn))
 	fmt.Println(xdate.Now().WeekdayStr(xdate.WeekType_cnShort))
 	fmt.Println(xdate.Now().WeekdayStr(xdate.WeekType_en))
 	fmt.Println(xdate.Now().WeekdayStr(xdate.WeekType_enShort))
-	fmt.Println(xdate.Now().UTC().Local().Format(xdate.TT))
+    
+
 	fmt.Println(xdate.Str2Time("2018-04-23 23:11:23", "Y-m-d H:i:s").PFormat("Y-m-d H:i:s"))
+    
+    fmt.Println(xdate.Now().Offset(xdate.DateField_DAY, 3).PFormat("Y-m-d H:i:s"))
 }
 
 ```
+
+**支持的格式字符**
 
 ```html
 
@@ -77,5 +90,38 @@ T  本机所在的时区 例如：EST，MDT
 c  ISO 8601 格式的日期 2004-02-12T15:19:21+00:00 
 r  RFC 822 格式的日期 例如：Thu, 21 Dec 2000 16:01:07 +0200  
 
+```
+
+
+
+**API:**
+
+```go
+func NowDateStr() string
+func NowDateTimeStr() string
+func NowTimeStr() string
+func NowUtcDateStr() string
+func NowUtcDateTimeStr() string
+func NowUtcTimeStr() string
+
+type XDate
+    func Date(day int, month int, year int) XDate
+    func DateTime(day int, month int, year int, hour int, min int, sec int) XDate
+    func Now() XDate
+    func Str2Time(str string, _format ...string) XDate
+    func Time(t time.Time) XDate
+    func Unix(sec int64, nsec int64) XDate
+    func (t XDate) DateStr() string
+    func (t XDate) DateTimeStr() string
+    func (t XDate) DayBeginDateTimeStr() string
+    func (t XDate) DayEndDateTimeStr() string
+    func (t XDate) Local() XDate
+    func (t XDate) Offset(field DateField, offset int) XDate
+    func (t XDate) PFormat(pformat string) string
+    func (t XDate) TimeStr() string
+    func (t XDate) UTC() XDate
+    func (t XDate) UnixMilli() int64
+    func (t XDate) Weekday() int
+    func (t XDate) WeekdayStr(wt WeekType) string
 ```
 

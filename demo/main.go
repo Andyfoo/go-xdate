@@ -24,4 +24,17 @@ func main() {
 	fmt.Println(xdate.Now().WeekdayStr(xdate.WeekType_enShort))
 	fmt.Println(xdate.Now().UTC().Local().Format(xdate.TT))
 	fmt.Println(xdate.Str2Time("2018-04-23 23:11:23", "Y-m-d H:i:s").PFormat("Y-m-d H:i:s"))
+
+	t1 := xdate.Now()
+	fmt.Println(t1.Offset(xdate.DateField_YEAR, 3).UTC().DateTimeStr())
+	fmt.Println(t1.Offset(xdate.DateField_MONTH, 3).PFormat("Y-m-d H:i:s"))
+	fmt.Println(xdate.Now().Offset(xdate.DateField_DAY, 3).PFormat("Y-m-d H:i:s"))
+
+	fmt.Println(xdate.Now().Offset(xdate.DateField_DAY, -113).PFormat("Y-m-d H:i:s"))
+
+	fmt.Println(xdate.Now().Offset(xdate.DateField_HOUR, 3).PFormat("Y-m-d H:i:s"))
+	fmt.Println(xdate.Now().Offset(xdate.DateField_MINUTE, 3).PFormat("Y-m-d H:i:s"))
+	fmt.Println(xdate.Now().Offset(xdate.DateField_SECOND, 3).PFormat("Y-m-d H:i:s"))
+
+	fmt.Println(xdate.Now().DayBeginDateTimeStr(), xdate.Now().DayEndDateTimeStr())
 }

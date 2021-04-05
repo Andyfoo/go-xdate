@@ -155,6 +155,45 @@ func Now() XDate {
 	return XDate{time.Now()}
 }
 
+//Time time to XDate
+func Time(t time.Time) XDate {
+	return XDate{t}
+}
+
+//Date date to XDate
+func Date(day int, month int, year int) XDate {
+	return XDate{
+		Time: time.Date(year, months[month], day, 0, 0, 0, 0, time.UTC),
+	}
+}
+
+//DateTime date&time to XDate
+func DateTime(day int, month int, year int, hour int, min int, sec int) XDate {
+	return XDate{
+		Time: time.Date(year, months[month], day, hour, min, sec, 0, time.UTC),
+	}
+}
+
+//Str2Time string date to XDate
+func Str2Time(str string, _format ...string) XDate {
+	var format = ""
+	if len(_format) > 0 {
+		format = _format[0]
+	} else if len(_format) == 0 && len(str) == 19 {
+		format = "Y-m-d H:i:s"
+	} else if len(_format) == 0 && len(str) == 10 {
+		format = "Y-m-d"
+	} else {
+		format = "Y-m-d"
+	}
+	format = PFormatConv(format)
+	time, err := time.Parse(format, str)
+	if err != nil {
+		return XDate{}
+	}
+	return XDate{time}
+}
+
 //NowDateStr return date string: 2006-01-02
 func NowDateStr() string {
 	return time.Now().Format(YMD)
@@ -288,45 +327,4 @@ func PFormatConv(pformat string) string {
 
 	}
 	return format.String()
-}
-
-//Time time to XDate
-func Time(time time.Time) XDate {
-	return XDate{
-		Time: time,
-	}
-}
-
-//Date date to XDate
-func Date(day int, month int, year int) XDate {
-	return XDate{
-		Time: time.Date(year, months[month], day, 0, 0, 0, 0, time.UTC),
-	}
-}
-
-//DateTime date&time to XDate
-func DateTime(day int, month int, year int, hour int, min int, sec int) XDate {
-	return XDate{
-		Time: time.Date(year, months[month], day, hour, min, sec, 0, time.UTC),
-	}
-}
-
-//Str2Time string date to XDate
-func Str2Time(str string, _format ...string) XDate {
-	var format = ""
-	if len(_format) > 0 {
-		format = _format[0]
-	} else if len(_format) == 0 && len(str) == 19 {
-		format = "Y-m-d H:i:s"
-	} else if len(_format) == 0 && len(str) == 10 {
-		format = "Y-m-d"
-	} else {
-		format = "Y-m-d"
-	}
-	format = PFormatConv(format)
-	time, err := time.Parse(format, str)
-	if err != nil {
-		return XDate{}
-	}
-	return XDate{time}
 }
